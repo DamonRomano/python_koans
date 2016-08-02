@@ -20,10 +20,19 @@ from runner.koan import *
 
 class Proxy:
     def __init__(self, target_object):
-        # WRITE CODE HERE
-
+        self._strings = []
         #initialize '_obj' attribute last. Trust me on this!
         self._obj = target_object
+
+    def __getattr__(self, attribute_name):
+        self.strings.append(attribute_name)
+
+    def __setattr__(self, attribute_name, attribute_value):
+        if attribute_name[0] != '':
+            self._strings.append(name)
+            return object.__setattr__(self._obj, name, value)
+        else:
+            return object.__setattr__(self, name, value)
 
     # WRITE CODE HERE
 
